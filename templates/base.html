@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css'%}">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Глухие Урочища</title>
+</head>
+
+<body style="background: url('{% static 'images/gl.jpeg' %}') no-repeat;">
+  <div class="sidenav">
+    <a href="{% url 'home' %}">Урочища</a>
+    {% if user.is_authenticated and app %}
+    <a href="{% url 'festival_app:view-app-musican' app.slug %}">Ваша заявка</a>
+    {% endif %}
+    {% if user.is_anonymous %}
+    <a href="{% url 'user_profiles:login' %}">Войти</a>
+    {% endif %}
+    {% if censor %}
+    <a href="{% url 'festival_app:view-applications' %}">Проверить заявки</a>
+    {% endif %}
+    <a href="{% url 'festival_app:way' %}">Как доехать</a>
+    <a href="{% url 'festival_app:application-create' %}">Подать заявку</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'user_profiles:logout' %}">Выйти</a>
+    {% endif %}
+  </div>
+  {% block content %}
+  <div class="container-fluid">
+    <div class="main">
+      <div class="scenes">
+        <h2>Что такое Глухие Урочища?</h2>
+        <p>Глухие урочища - это фестиваль для любительный активной музыки и отдыха. Изначально этот фестиваль провоидлся несколько раз в году,
+          но благодаря поддержки со стороны поситителей, а так же правительства нашего края, мы проводим фестиваль каждыую пятницу и субботу. 
+          Более подробную информацию о сценах и кол-ве музыкантов вы можете узнать в таблице ниже. Где мы находимся, вы можете узнать в разделе "Как доехать".
+        </p>
+        <table class="table table-bordered table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Название сцены</th>
+              <th scope="col">Описание</th>
+              <th scope="col">Количество групп в 1-ый день днём</th>
+              <th scope="col">Количество групп в 1-ый день вечером</th>
+              <th scope="col">Количество групп в 1-ый день поздним вечером</th>
+              <th scope="col">Количество групп в 2-ой день днём</th>
+              <th scope="col">Количество групп в 2-ой день вечером</th>
+              <th scope="col">Количество групп в 2-ой день поздним вечером</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for scene in scenes %}
+            <tr>
+              <td>{{ scene.get_title_display }}</td>
+              <td>{{ scene.description }}</td>
+              <td>{{ scene.first_day_afternoon }}</td>
+              <td>{{ scene.first_day_evn }}</td>
+              <td>{{ scene.first_day_late_evn }}</td>
+              <td>{{ scene.second_day_afternoon }}</td>
+              <td>{{ scene.second_day_evn }}</td>
+              <td>{{ scene.second_day_late_evn }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</body style="background: url('{% static 'images/gl.jpeg' %}');">
+
+</html>

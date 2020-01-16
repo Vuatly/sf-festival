@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+<div class="container-fluid">
+	<div class='login'>
+		<form method="post">
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			<button class="btn btn-primary" style="width:100%">Войти</button>
+		</form>
+		<p>У вас нет аккаунта? <a href="{% url 'user_profiles:register' %}">Регистрация.</a></p>
+	</div>
+</div>
+
+{% endblock content %}

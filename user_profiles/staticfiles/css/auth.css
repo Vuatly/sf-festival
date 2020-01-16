@@ -1,0 +1,23 @@
+.login {
+    top: 50%; 
+    left: 50%; 
+    width: 450px; 
+    height: 450px; 
+    position: absolute; 
+    margin-top: -325px; 
+    margin-left: -225px; 
+}
+
+.register {
+    top: 50%; 
+    left: 47%; 
+    width: 550px; 
+    height: 550px; 
+    position: absolute; 
+    margin-top: -325px; 
+    margin-left: -225px;
+}
+
+.login p {
+    margin-top: 10px;
+}

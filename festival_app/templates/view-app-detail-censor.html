@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static%}
+<link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+{% if application.accepted or application.denied %}
+<div class="detail-app">
+    <p>Имя группы или музыканта: {{ application.name }}</p>
+    <p>Формат выступления: {{ application.get_format_display }}</p>
+    <p>Подробное описание: {{ application.description }}</p>
+</div>
+{% else %}
+<div class="detail-app">
+    <p>Имя группы или музыканта: {{ application.name }}</p>
+    <p>Формат выступления: {{ application.get_format_display }}</p>
+    <p>Подробное описание: <br> {{ application.description }}</p>
+    <a href="{% url 'festival_app:like' application.slug %}"><button type="button" class="btn btn-primary">Нравится {{ application.likes.count }} </button></a>
+    {% if application.rating >= 3 %}
+    <a href="{% url 'festival_app:accepted' application.slug %}"><button type="button" class="btn btn-primary">Одобрить</button></a>
+    {% endif %}
+    {% if application.dislikes >= 5 %}
+    <a href="{% url 'festival_app:denied' application.slug %}"><button type="button" class="btn btn-primary">Отказать</button></a>
+    {% endif %}
+    <a href="{% url 'festival_app:abstain' application.slug %}"><button type="button" class="btn btn-primary">Воздержаться {{ application.abstain.count }}</button></a>
+    <a href="{% url 'festival_app:dislike' application.slug %}"><button type="button" class="btn btn-primary">Не нравится {{ application.dislikes.count }}</button></a>
+</div>
+{% endif %}
+{% endblock content %}

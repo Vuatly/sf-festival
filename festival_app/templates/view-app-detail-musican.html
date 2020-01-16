@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+<div class="mu-app">
+    <p>Имя группы или музыканта: {{ application.name }}</p>
+    <p>Формат выступления: {{ application.get_format_display }}</p>
+    <p>Подробное описание: <br> {{ application.description }}</p>
+    <p>Телефон для связи: {{ application.phone }}</p>
+    <p>Желаемая сцена: {{ application.get_scene_display }}</p>
+    <p>Желаемый день выступления: {{ application.get_performance_day_display }}</p>
+    <p>Пожелания: {{ application.wishes }} </p>
+    {% if application.denied %}
+    <p>Состояние заявки: Отказ. <br> Но вы не расстраивайтесь, вы можете попробовать в следующий раз!</p>
+    {% elif application.accepted %}
+    <p>Состояние заявки: Одобрена. <br> В ближайшее время с вами свяжется наш менеджер. Если возникнут вопросы
+    обращайтесь по телефону: +79********
+    </p>
+    {% else %}
+    <p>Состояние заявки: На рассмотрении. </p>
+    {% endif %}
+</div>
+
+
+{% endblock content %}

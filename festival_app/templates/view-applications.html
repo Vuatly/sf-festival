@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static "css/app.css" %}">
+<div class="container">
+    <div class="row">
+        {% if sum_unrw_apps != 0 %}
+        <div class="col-sm">
+            <h2> Нерасмотренные заявки </h2>
+                <div class="apps">
+                    {% for app in unreviewed_apps %}
+                    <a href="{% url 'festival_app:view-app-censor' app.slug %}">
+                        <h4> Заявка №{{ app.id}} </h4>
+                        <p>Имя группы/исполнителя: {{ app.name }}</p>
+                        <p>Желаемый день: {{ app.get_performance_day_display }}</p>
+                        <p>Формат выступления: {{ app.get_format_display }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+        </div>
+        {% endif %}
+        <div class="col-sm">
+            <h2>Одобренные заявки</h2>
+                <div class="apps">
+                    {% for app in accepted_apps %}
+                    <a href="{% url 'festival_app:view-app-censor' app.slug %}">
+                        <h4> Заявка №{{ app.id}} </h4>
+                        <p>Имя группы/исполнителя: {{ app.name }}</p>
+                        <p>Желаемый день: {{ app.get_performance_day_display }}</p>
+                        <p>Формат выступления: {{ app.get_format_display }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
