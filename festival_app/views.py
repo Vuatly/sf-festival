@@ -63,6 +63,7 @@ class ViewApplications(ListView):
     context_object_name = 'applications'
     template_name = 'view-applications.html'
     queryset = Application.objects.filter(denied=False)
+    paginate_by = 5
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_anonymous:
