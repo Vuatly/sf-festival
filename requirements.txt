@@ -2,7 +2,7 @@ django-bmemcached==0.2.4
 django-heroku==0.3.1
 gunicorn==20.0.4
 pylibmc==1.5.2
-Django==2.2.9
+Django==2.2.10
 django-bootstrap4==1.1.1
 python-slugify==4.0.0
 dj-database-url==0.5.0 
